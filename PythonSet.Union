@@ -1,0 +1,5 @@
+n = int(input())
+rolln = set(map(int,input().split()))
+b = int(input())
+rollb = set(map(int,input().split()))
+print(len(rolln.union(rollb)))
