@@ -1,0 +1,9 @@
+from math import exp,factorial
+
+def thnks_for_the_fish(machine, cost):
+    return sum((exp(-machine) * machine**k) / factorial(k) * (cost + 40 * k**2) for k in range(20))
+
+A,B = map(float,input().split(" "))
+
+print(round(thnks_for_the_fish(A, 160), 3))
+print(round(thnks_for_the_fish(B, 128), 3))
