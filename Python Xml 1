@@ -10,7 +10,8 @@ import xml.etree.ElementTree as etree
 #         get_attr_number(child,att)
 #     return sum(len(a) for a in att )
 def get_attr_number(node):
-    return len(node.attrib) + sum(get_attr_number(child) for child in node)
+#    return len(node.attrib) + sum(get_attr_number(child) for child in node)
+    return sum(len(a.attrib) for a in node.iter())
 
 if __name__ == '__main__':
     sys.stdin.readline()
