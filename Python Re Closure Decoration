@@ -1,10 +1,8 @@
-from re import match,sub
-
+from re import sub
 def wrapper(f):
     def fun(l):
-        p = r"(.*){0,3}(\d{5})(\d{5})$"
-        return f([sub(p, lambda match: f"+91 {match.group(2)} {match.group(3)}", num) 
-               for num in l])
+        return f([sub(r"(.*){0,3}(\d{5})(\d{5})$",\
+        r"+91 \2 \3", num)for num in l])
     return fun
 
 @wrapper
