@@ -1,30 +1,31 @@
 import java.util.*;
 
 class Rules {
+    public static boolean hasZero(int value)
+        {return String.valueOf(value).contains("0");}
+        
     public static boolean finish(int idx, int leap, int[] game)
         {return (idx + 1 > game.length - 1 ||
                 idx + leap > game.length - 1);}
                 
-    public static boolean hasZero(int value)
-        {return String.valueOf(value).contains("0");}
     public static boolean goBack(int idx, int[] game)
-        {if (idx == 0) return false;return hasZero(game[idx - 1]);}
+        {return (idx != 0 && hasZero(game[idx - 1]));}
+        
     public static boolean goForward(int idx, int[] game)
-        {return (idx + 1 < game.length && hasZero(game[idx+1]));}
+        {return hasZero(game[idx+1]);}
+        
     public static boolean leap(int idx, int leap, int[] game)
-        {return (idx + leap < game.length && hasZero(game[idx+leap]));}
+        {return hasZero(game[idx+leap]);}
 }
 public class Solution {
 
     public static boolean canWin(int idx,int leap, int[] game) {
         if (Rules.finish(idx, leap, game)) return true;
         game[idx] = 1;
-        boolean canWin = Rules.goForward(idx, game) &&
-                         canWin(idx + 1, leap, game) ||
-                         Rules.leap(idx, leap, game) && 
-                         canWin(idx + leap, leap, game) ||
-                         Rules.goBack(idx, game) &&
-                         canWin(idx - 1, leap, game);
+        boolean canWin = 
+        Rules.goForward(idx, game) && canWin(idx + 1, leap, game) ||
+        Rules.leap(idx, leap, game) && canWin(idx + leap, leap, game) ||
+        Rules.goBack(idx, game) && canWin(idx - 1, leap, game);
         game[idx] = 0;
         return canWin;
     }
