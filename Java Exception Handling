@@ -11,7 +11,7 @@ public class Solution {
             int y = sc.nextInt();
             System.out.println(x/y);
         }
-        catch (InputMismatchException e){System.out.println("java.util.InputMismatchException");}
+        catch (InputMismatchException e){System.out.println(e.getClass().getName());}
         catch (ArithmeticException e) {System.out.println(e);}
         
         
